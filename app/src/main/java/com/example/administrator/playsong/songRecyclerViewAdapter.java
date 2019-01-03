@@ -106,8 +106,7 @@ public class songRecyclerViewAdapter extends RecyclerView.Adapter<songRecyclerVi
                 connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
                 connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
 
-
-            Toast.makeText(mc, "اینترنت شما متصل شد ", Toast.LENGTH_SHORT).show();
+            
             return true;
 
         } else if (

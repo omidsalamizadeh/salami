@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         host.addTab(spec);
         spec = host.newTabSpec("List");
         spec.setContent(R.id.listTab);
-        spec.setIndicator("List");
+        spec.setIndicator("Playlist");
         host.addTab(spec);
 
 
@@ -118,9 +118,25 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if (mpAvailable && isPlaying) {
                     mediaSeekObj.setProgress(mp.getCurrentPosition());
+
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            position++;
+                            if (position > (songArrayList.size() - 1)) {
+                                position = 0;
+                            }
+                            selectSong(getApplicationContext(), position);
+
+                        }
+                    });
+
                 }
             }
         }, 1000, 1000);
+
+
+
 
 
         mediaSeekObj.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
