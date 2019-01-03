@@ -176,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
     public void btnNext(View view) {
         position++;
         if (position > (songArrayList.size() - 1)) {
@@ -212,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                 playPause.setText("Play");
             }
         } else {
-            Toast.makeText(getApplicationContext(), "No song selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "آهنگی انتخاب نشده است", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -226,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             playPause.setText("Play");
             mediaSeekObj.setProgress(0);
         } else {
-            Toast.makeText(getApplicationContext(), "No song selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "آهنگی انتخاب نشده است", Toast.LENGTH_SHORT).show();
         }
     }
 

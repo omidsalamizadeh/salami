@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -60,9 +62,11 @@ public class songRecyclerViewAdapter extends RecyclerView.Adapter<songRecyclerVi
         holder.cvObj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tabHost.setCurrentTab(0);
-                MainActivity.selectSong(mc,tspo);
 
+                if(isInternetOn()) {
+                    tabHost.setCurrentTab(0);
+                    MainActivity.selectSong(mc, tspo);
+                }
 
             }
         });
@@ -89,5 +93,32 @@ public class songRecyclerViewAdapter extends RecyclerView.Adapter<songRecyclerVi
         }
     }
 
+
+    public final boolean isInternetOn() {
+
+
+        ConnectivityManager connec = (ConnectivityManager) mc.getSystemService(mc.CONNECTIVITY_SERVICE);
+
+
+
+        if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
+
+            Toast.makeText(mc, "اینترنت شما متصل شد ", Toast.LENGTH_SHORT).show();
+            return true;
+
+        } else if (
+                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED  ) {
+
+            Toast.makeText(mc, " اتصال اینترنت را بررسی کنید ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mc, " به اینترنت متصل نمی باشید ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return false;
+    }
 
 }
