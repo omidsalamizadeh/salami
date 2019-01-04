@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.mp.start();
         MainActivity.mpAvailable = true;
         MainActivity.isPlaying = true;
-        MainActivity.playPause.setText("Pause");
+        MainActivity.playPause.setBackground(mc.getResources().getDrawable(R.drawable.pause1));
         MainActivity.mediaSeekObj.setMax(MainActivity.mp.getDuration());
         MainActivity.lengthObj.setText(MainActivity.MillisToMin(MainActivity.mp.getDuration()));
 
@@ -224,11 +224,11 @@ public class MainActivity extends AppCompatActivity {
             if (!isPlaying) {
                 mp.start();
                 isPlaying = true;
-                playPause.setText("Pause");
+                MainActivity.playPause.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.pause1));
             } else {
                 isPlaying = false;
                 mp.pause();
-                playPause.setText("Play");
+                MainActivity.playPause.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.play1));
             }
         } else {
             Toast.makeText(getApplicationContext(), "آهنگی انتخاب نشده است", Toast.LENGTH_SHORT).show();
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
             mp.stop();
             mpAvailable = false;
             isPlaying = false;
-            playPause.setText("Play");
+            MainActivity.playPause.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.play1));
             mediaSeekObj.setProgress(0);
         } else {
             Toast.makeText(getApplicationContext(), "آهنگی انتخاب نشده است", Toast.LENGTH_SHORT).show();
